@@ -1,0 +1,2 @@
+include README.md
+recursive-include predictor_classifier/ml-model *.pkl
