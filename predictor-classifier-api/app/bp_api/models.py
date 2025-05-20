@@ -28,5 +28,11 @@ class Predictor(db.Model):
     def save(self):
         ml_predictor = PredictorClassifier()
         self.is_fail = ml_predictor.predict(self.air_temperature, self.process_temperature, self.rotational_speed, self.torque)
-        db.session.add(self)
+
+        if not self.id:
+            db.session.add(self)
+        db.session.commit()
+
+    def delete (self):
+        db.session.delete(self)
         db.session.commit()
