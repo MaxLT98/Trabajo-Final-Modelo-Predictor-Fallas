@@ -10,11 +10,20 @@ class Predictor(db.Model):
     torque = db.Column(db.Double, primary_key=False)
     is_fail = db.Column(db.Boolean, nullable=False)
 
-    def __init__(self, air_temperature, process_temperature, rotational_speed, torque, is_fail):
+    def __init__(self, air_temperature, process_temperature, rotational_speed, torque):
         self.air_temperature = air_temperature
         self.process_temperature = process_temperature
         self.rotational_speed = rotational_speed
         self.torque = torque
+
+    @staticmethod
+    def get_all():
+        return Predictor.query.all()
+    
+    @staticmethod
+    def get_by_id(id):
+        return Predictor.query.get(id)
+
 
     def save(self):
         ml_predictor = PredictorClassifier()
